@@ -21,7 +21,9 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = []
+dependencies = [
+  "troposphere"
+]
 
 [project.urls]
 Documentation = "https://github.com/joelmccoy/pyiamanalyzer#readme"
@@ -37,6 +39,7 @@ dependencies = [
   "pytest",
 ]
 [tool.hatch.envs.default.scripts]
+main = "python src/pyiamanalyzer/main.py {args}"
 test = "pytest {args:tests}"
 test-cov = "coverage run -m pytest {args:tests}"
 cov-report = [
@@ -50,13 +53,6 @@ cov = [
 
 [[tool.hatch.envs.all.matrix]]
 python = ["3.11", "3.12"]
-
-[tool.hatch.envs.types]
-dependencies = [
-  "mypy>=1.0.0",
-]
-[tool.hatch.envs.types.scripts]
-check = "mypy --install-types --non-interactive {args:src/pyiamanalyzer tests}"
 
 [tool.coverage.run]
 source_pkgs = ["pyiamanalyzer", "tests"]
@@ -75,4 +71,21 @@ exclude_lines = [
   "no cov",
   "if __name__ == .__main__.:",
   "if TYPE_CHECKING:",
+]
+
+[tool.hatch.envs.lint]
+extra-dependencies = [
+  "mypy>=1.0.0",
+  "ruff>=0.1.9",
+]
+
+[tool.hatch.envs.lint.scripts]
+typing = "mypy --install-types --non-interactive {args:src/pyiamanalyzer tests}"
+fmt = [
+  "ruff {args:.}",
+  "ruff format {args:.}",
+]
+all = [
+  "fmt",
+  "typing",
 ]
