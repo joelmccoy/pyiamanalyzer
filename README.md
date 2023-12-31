@@ -12,7 +12,7 @@
 - [License](#license)
 
 ## Description
-Secure your AWS infrastructure effortlessly with pyiamanalyzer – a Python package designed for streamlined IAM security. Seamlessly deploy and manage infrastructure while receiving real-time alerts on IAM risks generated from AWS IAM Access Analyzer. Safeguard your AWS environment with automated security checks and proactive risk mitigation.
+Secure your AWS infrastructure effortlessly with pyiamanalyzer – a toolkit designed for streamlined IAM security. Seamlessly deploy and manage infrastructure while receiving real-time alerts on IAM risks generated from AWS IAM Access Analyzer. Safeguard your AWS environment with automated security checks and proactive risk mitigation.
 
 Key Features:
 

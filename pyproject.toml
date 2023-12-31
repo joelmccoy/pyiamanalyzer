@@ -22,7 +22,9 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
-  "troposphere"
+  "troposphere",
+  "typer",
+  "boto3",
 ]
 
 [project.urls]
@@ -37,14 +39,15 @@ path = "src/pyiamanalyzer/__about__.py"
 dependencies = [
   "coverage[toml]>=6.5",
   "pytest",
+  "moto[cloudformation]"
 ]
 [tool.hatch.envs.default.scripts]
-main = "python src/pyiamanalyzer/main.py {args}"
+pyiamanalyzer = "python src/pyiamanalyzer/main.py {args}"
 test = "pytest {args:tests}"
 test-cov = "coverage run -m pytest {args:tests}"
 cov-report = [
   "- coverage combine",
-  "coverage report",
+  "coverage report --fail-under=90 --show-missing",
 ]
 cov = [
   "test-cov",
@@ -80,9 +83,9 @@ extra-dependencies = [
 ]
 
 [tool.hatch.envs.lint.scripts]
-typing = "mypy --install-types --non-interactive {args:src/pyiamanalyzer tests}"
+typing = "mypy --install-types --non-interactive --ignore-missing-imports {args:src/pyiamanalyzer tests}"
 fmt = [
-  "ruff {args:.}",
+  "ruff {args:.} --fix",
   "ruff format {args:.}",
 ]
 all = [
